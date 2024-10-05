@@ -1,136 +1,150 @@
 
 
-### **Step 1: Install Thonny**
+### **Step 1: Install PyCharm Community Edition**
 
-1. Go to the official Thonny website: [https://thonny.org](https://thonny.org)
-2. Download and install the version appropriate for your operating system (Windows, macOS, or Linux).
-3. Follow the prompts to complete the installation process.
+1. Go to the official PyCharm website: [https://www.jetbrains.com/pycharm/download](https://www.jetbrains.com/pycharm/download).
+2. Download the **Community Edition** (which is free).
+3. Follow the prompts to install PyCharm on your operating system (Windows, macOS, or Linux).
 
 ---
 
-### **Step 2: Open Thonny**
+### **Step 2: Open PyCharm and Create a New Project**
 
-1. Once installed, open Thonny from your desktop or start menu.
-2. Thonny’s interface should now be visible.
+1. **Open PyCharm** after installation.
+2. **Create a new project**:
+   - Click on **New Project** on the welcome screen.
+   - Choose a location for your project.
+   - For the **Environment**, select **New environment using Virtualenv**.
+   - Check if the base interpreter is set to the correct Python version installed on your system.
+   - Click **Create**.
 
 ---
 
 ### **Step 3: Install Required Libraries**
 
-To run the project, we need to install several Python libraries. We’ll be doing this through Thonny.
+Once your project is created, you'll need to install several libraries required to run the app.
 
-1. **Open the terminal in Thonny:**
-   - In Thonny, click on **Tools** in the top menu.
-   - Select **Manage Packages** from the dropdown.
+1. **Open the Terminal in PyCharm**:
+   - At the bottom of PyCharm, click on **Terminal** to open a command-line interface inside PyCharm.
 
-2. **Install the Required Libraries:**
-   In the "Manage packages" window, you will need to install all the necessary libraries:
-   
-   Type in the following libraries one by one and click **Install** for each:
-   
-   - **streamlit**
-   - **pandas**
-   - **matplotlib**
-   - **plotly**
-   - **numpy**
-   - **seaborn**
-   
-   Example:
-   - Search for `streamlit` in the search box, select it from the list, and then click **Install**.
-   - Repeat this process for each library until all are installed.
+2. **Install the Required Libraries**:
+   Run the following command in the terminal to install all the required Python packages:
+
+   ```bash
+   pip install streamlit pandas matplotlib plotly numpy seaborn
+   ```
+
+This command installs the necessary libraries:
+
+- `streamlit` for running the web app.
+- `pandas` for data manipulation.
+- `matplotlib` and `seaborn` for plotting.
+- `plotly` for interactive plots.
+- `numpy` for numerical computations.
 
 ---
 
-### **Step 4: Set Up a Virtual Environment (Optional but Recommended)**
+### **Step 4: Open the Python File**
 
-For better management of dependencies, we recommend setting up a virtual environment (though not necessary for beginners):
+1. Once the project is set up, **copy your project files** (e.g., `space_experiment_visualization.py`) into the project folder you created.
+   
+2. **Open the Python file**:
+   - In PyCharm’s left-hand **Project** pane, find and double-click on the file (e.g., `space_experiment_visualization.py`) to open it in the editor.
 
-1. **Create a virtual environment:**
-   - Open the terminal in Thonny by clicking on **View > Show Shell**.
-   - In the terminal, type the following command to create a virtual environment:
+---
+
+### **Step 5: Run the Streamlit App**
+
+To run the app using **Streamlit**, we need to execute a command in the terminal.
+
+1. **Open the Terminal** (if it's not already open):
+   - At the bottom of PyCharm, click on the **Terminal** tab.
+
+2. **Run Streamlit**:
+   In the terminal, type the following command to start the Streamlit server:
+
+   ```bash
+   streamlit run space_experiment_visualization.py
+   ```
+
+3. **Open in Browser**:
+   - Once the app starts, you will see a link in the terminal that looks something like `http://localhost:8501`.
+   - Copy this link, paste it into your browser’s address bar, and hit **Enter**.
+   - Your Streamlit app will now open in the browser.
+
+---
+
+### **Step 6: Interact with the App**
+
+Now that the app is running, you can interact with it as follows:
+
+1. **Use the Sidebar**:
+   - The sidebar provides options to switch between datasets (e.g., OSD-379, OSD-665) and visualizations.
+   
+2. **Visualize Data**:
+   - View different data visualizations like bar charts, interactive plots, and more.
+   
+3. **Add New Experiment**:
+   - In the sidebar, use the **Add Experiment** feature to input custom data for new experiments and visualize them.
+
+---
+
+### **Step 7: (Optional) Create and Activate a Virtual Environment**
+
+Although this step is optional, it’s highly recommended for managing dependencies in Python projects.
+
+1. **Create a virtual environment**:
+   - If you didn’t create one during project setup, open the **Terminal** and run:
 
      ```bash
      python -m venv venv
      ```
 
-2. **Activate the virtual environment:**
-   - For **Windows**, type:
+2. **Activate the virtual environment**:
+   - For **Windows**, run:
 
      ```bash
      venv\Scripts\activate
      ```
 
-   - For **Mac/Linux**, type:
+   - For **macOS/Linux**, run:
 
      ```bash
      source venv/bin/activate
      ```
 
-3. **Install libraries inside the virtual environment:**
-   - Once the environment is activated, install the libraries again (only inside the environment) using:
+3. **Reinstall the libraries in the virtual environment** (if needed):
 
-     ```bash
-     pip install streamlit pandas matplotlib plotly numpy seaborn
-     ```
+   ```bash
+   pip install streamlit pandas matplotlib plotly numpy seaborn
+   ```
 
----
+4. After activating the virtual environment, run the app again by typing:
 
-### **Step 5: Open the Project in Thonny**
-
-1. **Open the Project File:**
-   - Click on **File** > **Open**.
-   - Navigate to the folder where the project file (e.g., `space_experiment_visualization.py`) is located.
-   - Select the file and click **Open**.
+   ```bash
+   streamlit run space_experiment_visualization.py
+   ```
 
 ---
 
-### **Step 6: Run the Streamlit App**
+### **Step 8: Troubleshooting Common Issues**
 
-1. **Open the Thonny Shell** (if it’s not already open):
-   - Click on **View > Show Shell** if the shell is hidden.
+1. **Error: ModuleNotFoundError: No module named 'streamlit'**:
+   - If you encounter this error, it means Streamlit is not installed. Make sure you have installed all the necessary libraries using `pip install streamlit`.
 
-2. **Run the App:**
-   - In the **Thonny Shell**, type the following command to run the Streamlit app:
-
-     ```bash
-     streamlit run space_experiment_visualization.py
-     ```
-
-3. **Open in Browser:**
-   - Once the app is running, Thonny will display a link in the shell.
-   - Copy that link (it usually looks like `http://localhost:8501`), paste it into your web browser’s address bar, and press Enter.
-
-   Your app should now open and display the visualizations!
-
----
-
-### **Step 7: Interact with the App**
-
-Now that the app is running, you can:
-
-- Interact with the sidebar to switch between datasets, themes, and experiment options.
-- Visualize the space experiment data through interactive charts and graphs.
-
----
-
-### **Step 8: (Optional) Add Your Own Experiment**
-
-To add your own experiment to the app:
-
-1. Open the **Add Experiment** feature in the sidebar.
-2. Input the experiment data, including the number of samples, groups, and treatments.
-3. Submit the data to visualize it alongside existing NASA experiments.
+2. **Python Interpreter**:
+   - If PyCharm can’t find Python, make sure your project’s interpreter is correctly set up by going to **File** > **Settings** > **Project: YourProject** > **Python Interpreter** and selecting the correct interpreter.
 
 ---
 
 ### **Summary of Key Steps**
 
-1. Install Thonny.
-2. Install necessary libraries (e.g., `streamlit`, `pandas`, etc.) through Thonny’s package manager.
-3. Optionally set up a virtual environment for managing dependencies.
-4. Open your project file in Thonny.
-5. Run the app using the command: `streamlit run space_experiment_visualization.py`.
-6. Interact with the app via your web browser.
+1. Install PyCharm.
+2. Create a new project with a virtual environment (optional but recommended).
+3. Install required libraries (`streamlit`, `pandas`, etc.).
+4. Open the project file in PyCharm.
+5. Run the app using `streamlit run space_experiment_visualization.py`.
+6. Open the Streamlit app in a browser.
+7. Interact with the app and add new experiments.
 
 ---
-
