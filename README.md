@@ -1,161 +1,55 @@
-# My project
-import streamlit as st
-import pandas as pd
-import plotly.express as px
-import seaborn as sns
-import matplotlib.pyplot as plt
+Here’s a step-by-step guide to opening and running the Python-based visualization tool for space biological experiments using **Thonny**:
 
-# Set a dark theme for plots
-plt.style.use('dark_background')
+### Step 1: Install Thonny
+1. Download and install Thonny IDE from [thonny.org](https://thonny.org/).
+2. Open the Thonny IDE after installation is complete.
 
-# Sample data for OSD-379 and OSD-665
-data_osd_379 = {
-    'Group': ['Mice in Space', 'Control Mice'],
-    'Liver Size (cm^2)': [2.5, 3.0],
-}
+### Step 2: Install Python Libraries
+Before running the code, you need to install several libraries. These can be installed directly within Thonny:
+1. Open **Thonny**.
+2. Go to **Tools** > **Manage Packages...**.
+3. In the "Package name" field, type the following libraries one at a time and click **Install**:
+   - `pandas`
+   - `seaborn`
+   - `matplotlib`
+   - `streamlit`
 
-data_osd_665 = {
-    'Group': ['Mice in Space', 'Control Mice'],
-    'Muscle Mass (g)': [1.2, 1.5],
-}
+You can also install all libraries at once via Thonny’s terminal:
+1. Open Thonny.
+2. Go to **View** > **Show Shell**.
+3. Type the following command into the shell and press **Enter**:
 
-# Additional NASA experiments
-additional_experiments = {
-    'Experiment': [
-        'A Microgravity Investigation of Cement Solidification (OSD-705)',
-        'Effects of Microgravity on Stem Cell Behavior (OSD-782)',
-        'Tissue Regeneration in Microgravity (OSD-689)',
-    ],
-    'Group Size': [6, 8, 5],
-    'Duration (days)': [30, 28, 25],
-}
+   ```bash
+   pip install pandas seaborn matplotlib streamlit
+   ```
 
-# Initialize session state for storing user-added experiments
-if 'experiments' not in st.session_state:
-    st.session_state.experiments = []
+### Step 3: Add Data Files
+1. Download the cleaned CSV files (`cleaned_osd_379.csv` and `cleaned_osd_665.csv`).
+2. Place these files in a folder called `data` inside the same directory where your Python script resides.
 
+### Step 4: Open and Run the Code in Thonny
+1. Download or write the Python code for the tool in Thonny.
+2. Save the script with the name `space_experiment_visualization.py` (or any preferred name).
+3. Press **F5** or click on the green **Run** button at the top to run the script.
+4. **Streamlit** will prompt you with a message like:
 
-# Function to add a new experiment
-def add_experiment(name, group_size, duration, description, date):
-    new_experiment = {
-        'Name': name,
-        'Group Size': group_size,
-        'Duration (days)': duration,
-        'Description': description,
-        'Date Conducted': date
-    }
-    st.session_state.experiments.append(new_experiment)
-    st.success(f"Experiment '{name}' added successfully!")
+   ```
+   Warning: to view this Streamlit app on a browser, run it with the following
+   command:
+   
+   streamlit run <script_name>.py
+   ```
 
+### Step 5: Run Streamlit in a Web Browser
+To run the Streamlit app and view the visualizations in a web browser:
+1. Open **Thonny’s Shell** (located at the bottom).
+2. In the **Shell**, type:
 
-# Function to display the sidebar
-def display_sidebar():
-    st.sidebar.title("Space Experiment Visualization")
+   ```bash
+   streamlit run space_experiment_visualization.py
+   ```
 
-    # Input fields for adding an experiment
-    experiment_name = st.sidebar.text_input("Add Your Experiment Name:")
-    group_size = st.sidebar.number_input("Group Size", min_value=1, max_value=20, value=5)
-    duration = st.sidebar.number_input("Duration (days)", min_value=1, max_value=100, value=30)
-    experiment_description = st.sidebar.text_area("Experiment Description:")
-    experiment_date = st.sidebar.date_input("Date Conducted:")
+3. Press **Enter**.
+4. A web browser window will open automatically with your visualizations, or a link will appear. Click the link or copy-paste it into a web browser to view your app.
 
-    if st.sidebar.button("Add Experiment"):
-        if experiment_name:
-            add_experiment(experiment_name, group_size, duration, experiment_description, experiment_date)
-        else:
-            st.error("Please enter a valid experiment name.")
-
-    # Download added experiments as CSV
-    if st.sidebar.button("Download Experiments as CSV"):
-        if st.session_state.experiments:
-            exp_df = pd.DataFrame(st.session_state.experiments)
-            csv = exp_df.to_csv(index=False).encode('utf-8')
-            st.sidebar.download_button(
-                label="Download CSV",
-                data=csv,
-                file_name='user_experiments.csv',
-                mime='text/csv'
-            )
-        else:
-            st.sidebar.error("No experiments available to download.")
-
-    # Display existing experiments
-    st.sidebar.subheader("Existing Experiments")
-    st.sidebar.write("OSD-379: Rodent Research Reference Mission-1")
-    st.sidebar.write("OSD-665: Rodent Research-23")
-    st.sidebar.write("Other NASA Experiments:")
-    for exp in additional_experiments['Experiment']:
-        st.sidebar.write(exp)
-
-    # Show user-added experiments
-    st.sidebar.subheader("Your Added Experiments")
-    if st.session_state.experiments:
-        exp_df = pd.DataFrame(st.session_state.experiments)
-        st.sidebar.dataframe(exp_df)
-
-        # Option to delete selected experiment
-        selected_exp = st.sidebar.selectbox("Select Experiment to Delete",
-                                            list(range(len(st.session_state.experiments))), index=-1)
-        if st.sidebar.button("Delete Selected Experiment"):
-            if selected_exp != -1:
-                del st.session_state.experiments[selected_exp]
-                st.sidebar.success("Experiment deleted successfully!")
-    else:
-        st.sidebar.write("No experiments added yet.")
-
-
-# Function to display summary statistics
-def display_summary_stats(data, label):
-    st.subheader(f"{label} Summary Statistics")
-    df = pd.DataFrame(data)
-    st.write(df.describe())
-
-
-# Function to create interactive plots using Plotly
-def create_interactive_plots():
-    st.title("Biological Experiments in Space")
-    st.write(
-        "This tool visualizes biological experiments performed in space, "
-        "providing insights into the effects of microgravity on various biological systems."
-    )
-
-    # OSD-379 plot
-    st.subheader("OSD-379: Rodent Research Reference Mission-1")
-    st.write(
-        "Mice flew on the International Space Station for 22-40 days, "
-        "with liver changes compared to similar mice that remained on Earth."
-    )
-    df_osd_379 = pd.DataFrame(data_osd_379)
-    fig_379 = px.bar(df_osd_379, x='Group', y='Liver Size (cm^2)', title='Liver Size Comparison in OSD-379')
-    st.plotly_chart(fig_379)
-
-    # OSD-665 plot
-    st.subheader("OSD-665: Rodent Research-23")
-    st.write(
-        "Mice flew on the International Space Station for 38 days, "
-        "with leg muscle changes compared to similar mice that remained on Earth."
-    )
-    df_osd_665 = pd.DataFrame(data_osd_665)
-    fig_665 = px.bar(df_osd_665, x='Group', y='Muscle Mass (g)', title='Muscle Mass Comparison in OSD-665')
-    st.plotly_chart(fig_665)
-
-    # Additional NASA experiments plot
-    st.subheader("Additional NASA Experiments")
-    st.write("This graph displays the group sizes of additional NASA experiments.")
-    exp_df = pd.DataFrame(additional_experiments)
-    fig_additional = px.bar(exp_df, x='Experiment', y='Group Size', title='Group Sizes of Additional NASA Experiments')
-    st.plotly_chart(fig_additional)
-
-    # Display summary statistics for additional experiments
-    display_summary_stats(additional_experiments, "Additional NASA Experiments")
-
-
-# Main application flow
-def main():
-    display_sidebar()
-    create_interactive_plots()
-
-
-# Run the application
-if __name__ == "__main__":
-    main()
+Now you can view and interact with the space experiment visualization tool!
