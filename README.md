@@ -1,55 +1,136 @@
-Here’s a step-by-step guide to opening and running the Python-based visualization tool for space biological experiments using **Thonny**:
 
-### Step 1: Install Thonny
-1. Download and install Thonny IDE from [thonny.org](https://thonny.org/).
-2. Open the Thonny IDE after installation is complete.
 
-### Step 2: Install Python Libraries
-Before running the code, you need to install several libraries. These can be installed directly within Thonny:
-1. Open **Thonny**.
-2. Go to **Tools** > **Manage Packages...**.
-3. In the "Package name" field, type the following libraries one at a time and click **Install**:
-   - `pandas`
-   - `seaborn`
-   - `matplotlib`
-   - `streamlit`
+### **Step 1: Install Thonny**
 
-You can also install all libraries at once via Thonny’s terminal:
-1. Open Thonny.
-2. Go to **View** > **Show Shell**.
-3. Type the following command into the shell and press **Enter**:
+1. Go to the official Thonny website: [https://thonny.org](https://thonny.org)
+2. Download and install the version appropriate for your operating system (Windows, macOS, or Linux).
+3. Follow the prompts to complete the installation process.
 
-   ```bash
-   pip install pandas seaborn matplotlib streamlit
-   ```
+---
 
-### Step 3: Add Data Files
-1. Download the cleaned CSV files (`cleaned_osd_379.csv` and `cleaned_osd_665.csv`).
-2. Place these files in a folder called `data` inside the same directory where your Python script resides.
+### **Step 2: Open Thonny**
 
-### Step 4: Open and Run the Code in Thonny
-1. Download or write the Python code for the tool in Thonny.
-2. Save the script with the name `space_experiment_visualization.py` (or any preferred name).
-3. Press **F5** or click on the green **Run** button at the top to run the script.
-4. **Streamlit** will prompt you with a message like:
+1. Once installed, open Thonny from your desktop or start menu.
+2. Thonny’s interface should now be visible.
 
-   ```
-   Warning: to view this Streamlit app on a browser, run it with the following
-   command:
+---
+
+### **Step 3: Install Required Libraries**
+
+To run the project, we need to install several Python libraries. We’ll be doing this through Thonny.
+
+1. **Open the terminal in Thonny:**
+   - In Thonny, click on **Tools** in the top menu.
+   - Select **Manage Packages** from the dropdown.
+
+2. **Install the Required Libraries:**
+   In the "Manage packages" window, you will need to install all the necessary libraries:
    
-   streamlit run <script_name>.py
-   ```
+   Type in the following libraries one by one and click **Install** for each:
+   
+   - **streamlit**
+   - **pandas**
+   - **matplotlib**
+   - **plotly**
+   - **numpy**
+   - **seaborn**
+   
+   Example:
+   - Search for `streamlit` in the search box, select it from the list, and then click **Install**.
+   - Repeat this process for each library until all are installed.
 
-### Step 5: Run Streamlit in a Web Browser
-To run the Streamlit app and view the visualizations in a web browser:
-1. Open **Thonny’s Shell** (located at the bottom).
-2. In the **Shell**, type:
+---
 
-   ```bash
-   streamlit run space_experiment_visualization.py
-   ```
+### **Step 4: Set Up a Virtual Environment (Optional but Recommended)**
 
-3. Press **Enter**.
-4. A web browser window will open automatically with your visualizations, or a link will appear. Click the link or copy-paste it into a web browser to view your app.
+For better management of dependencies, we recommend setting up a virtual environment (though not necessary for beginners):
 
-Now you can view and interact with the space experiment visualization tool!
+1. **Create a virtual environment:**
+   - Open the terminal in Thonny by clicking on **View > Show Shell**.
+   - In the terminal, type the following command to create a virtual environment:
+
+     ```bash
+     python -m venv venv
+     ```
+
+2. **Activate the virtual environment:**
+   - For **Windows**, type:
+
+     ```bash
+     venv\Scripts\activate
+     ```
+
+   - For **Mac/Linux**, type:
+
+     ```bash
+     source venv/bin/activate
+     ```
+
+3. **Install libraries inside the virtual environment:**
+   - Once the environment is activated, install the libraries again (only inside the environment) using:
+
+     ```bash
+     pip install streamlit pandas matplotlib plotly numpy seaborn
+     ```
+
+---
+
+### **Step 5: Open the Project in Thonny**
+
+1. **Open the Project File:**
+   - Click on **File** > **Open**.
+   - Navigate to the folder where the project file (e.g., `space_experiment_visualization.py`) is located.
+   - Select the file and click **Open**.
+
+---
+
+### **Step 6: Run the Streamlit App**
+
+1. **Open the Thonny Shell** (if it’s not already open):
+   - Click on **View > Show Shell** if the shell is hidden.
+
+2. **Run the App:**
+   - In the **Thonny Shell**, type the following command to run the Streamlit app:
+
+     ```bash
+     streamlit run space_experiment_visualization.py
+     ```
+
+3. **Open in Browser:**
+   - Once the app is running, Thonny will display a link in the shell.
+   - Copy that link (it usually looks like `http://localhost:8501`), paste it into your web browser’s address bar, and press Enter.
+
+   Your app should now open and display the visualizations!
+
+---
+
+### **Step 7: Interact with the App**
+
+Now that the app is running, you can:
+
+- Interact with the sidebar to switch between datasets, themes, and experiment options.
+- Visualize the space experiment data through interactive charts and graphs.
+
+---
+
+### **Step 8: (Optional) Add Your Own Experiment**
+
+To add your own experiment to the app:
+
+1. Open the **Add Experiment** feature in the sidebar.
+2. Input the experiment data, including the number of samples, groups, and treatments.
+3. Submit the data to visualize it alongside existing NASA experiments.
+
+---
+
+### **Summary of Key Steps**
+
+1. Install Thonny.
+2. Install necessary libraries (e.g., `streamlit`, `pandas`, etc.) through Thonny’s package manager.
+3. Optionally set up a virtual environment for managing dependencies.
+4. Open your project file in Thonny.
+5. Run the app using the command: `streamlit run space_experiment_visualization.py`.
+6. Interact with the app via your web browser.
+
+---
+
