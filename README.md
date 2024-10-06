@@ -1,5 +1,7 @@
 YOUTUBE VIDEO - 
 
+### STEP 0: INSTALL PYTHON
+
 ### **Step 1: Install PyCharm Community Edition**
 
 1. Go to the official PyCharm website: [https://www.jetbrains.com/pycharm/download](https://www.jetbrains.com/pycharm/download).
@@ -11,8 +13,8 @@ YOUTUBE VIDEO -
 ### **Step 2: Open PyCharm and Create a New Project**
 
 1. **Open PyCharm** after installation.
-2. **Create a new project**:
-   - Click on **New Project** on the welcome screen.
+2. **Create space_experiment_visualization.py**:
+   - Click on **space_experiment_visualization.py** on the welcome screen.
    - Choose a location for your project.
    - For the **Environment**, select **New environment using Virtualenv**.
    - Check if the base interpreter is set to the correct Python version installed on your system.
@@ -46,7 +48,7 @@ This command installs the necessary libraries:
 
 ### **Step 4: Open the Python File**
 
-1. Once the project is set up, **copy your project files** (e.g., `space_experiment_visualization.py`) into the project folder you created.
+1. Once the project is set up, **OPEN THE NASA SPACE APP.PY IN GITHUB AND COPY THE TEXT** (e.g., `space_experiment_visualization.py`) into the project folder you created.
    
 2. **Open the Python file**:
    - In PyCharm’s left-hand **Project** pane, find and double-click on the file (e.g., `space_experiment_visualization.py`) to open it in the editor.
