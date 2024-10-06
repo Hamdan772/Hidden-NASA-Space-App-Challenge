@@ -33,7 +33,6 @@ additional_experiments = {
 if 'experiments' not in st.session_state:
     st.session_state.experiments = []
 
-
 # Function to add a new experiment
 def add_experiment(name, group_size, duration, description, date):
     new_experiment = {
@@ -46,13 +45,12 @@ def add_experiment(name, group_size, duration, description, date):
     st.session_state.experiments.append(new_experiment)
     st.success(f"Experiment '{name}' added successfully!")
 
-
-# Function to display the sidebar
+# Function to display the sidebar and manage experiments
 def display_sidebar():
-    st.sidebar.title("Space Experiment Visualization")
+    st.sidebar.title("Space Experiment Management")
 
     # Input fields for adding an experiment
-    experiment_name = st.sidebar.text_input("Add Your Experiment Name:")
+    experiment_name = st.sidebar.text_input("Add Experiment Name:")
     group_size = st.sidebar.number_input("Group Size", min_value=1, max_value=20, value=5)
     duration = st.sidebar.number_input("Duration (days)", min_value=1, max_value=100, value=30)
     experiment_description = st.sidebar.text_area("Experiment Description:")
@@ -79,12 +77,9 @@ def display_sidebar():
             st.sidebar.error("No experiments available to download.")
 
     # Display existing experiments
-    st.sidebar.subheader("Existing Experiments")
-    st.sidebar.write("OSD-379: Rodent Research Reference Mission-1")
-    st.sidebar.write("OSD-665: Rodent Research-23")
-    st.sidebar.write("Other NASA Experiments:")
+    st.sidebar.subheader("NASA Space Experiments")
     for exp in additional_experiments['Experiment']:
-        st.sidebar.write(exp)
+        st.sidebar.write(f"- {exp}")
 
     # Show user-added experiments
     st.sidebar.subheader("Your Added Experiments")
@@ -93,8 +88,11 @@ def display_sidebar():
         st.sidebar.dataframe(exp_df)
 
         # Option to delete selected experiment
-        selected_exp = st.sidebar.selectbox("Select Experiment to Delete",
-                                            list(range(len(st.session_state.experiments))), index=-1)
+        selected_exp = st.sidebar.selectbox(
+            "Select Experiment to Delete",
+            options=list(range(len(st.session_state.experiments))),
+            format_func=lambda x: st.session_state.experiments[x]['Name'] if x != -1 else "None"
+        )
         if st.sidebar.button("Delete Selected Experiment"):
             if selected_exp != -1:
                 del st.session_state.experiments[selected_exp]
@@ -102,13 +100,29 @@ def display_sidebar():
     else:
         st.sidebar.write("No experiments added yet.")
 
-
 # Function to display summary statistics
 def display_summary_stats(data, label):
     st.subheader(f"{label} Summary Statistics")
     df = pd.DataFrame(data)
     st.write(df.describe())
 
+# New function to display a table for experiments
+def display_experiment_table(data, label):
+    st.subheader(f"{label} Data Table")
+    df = pd.DataFrame(data)
+    st.dataframe(df)
+
+# New function to create a box plot
+def create_boxplot(data, x, y, title):
+    st.subheader(title)
+    fig, ax = plt.subplots()
+    sns.boxplot(x=x, y=y, data=data, ax=ax)
+    st.pyplot(fig)
+
+# New function to create scatter plots
+def create_scatter_plot(df, x, y, title):
+    fig = px.scatter(df, x=x, y=y, title=title)
+    st.plotly_chart(fig)
 
 # Function to create interactive plots using Plotly
 def create_interactive_plots():
@@ -145,15 +159,20 @@ def create_interactive_plots():
     fig_additional = px.bar(exp_df, x='Experiment', y='Group Size', title='Group Sizes of Additional NASA Experiments')
     st.plotly_chart(fig_additional)
 
-    # Display summary statistics for additional experiments
+    # Displaying a table and summary statistics for additional experiments
+    display_experiment_table(additional_experiments, "Additional NASA Experiments")
     display_summary_stats(additional_experiments, "Additional NASA Experiments")
 
+    # Creating a scatter plot for duration vs group size in additional experiments
+    create_scatter_plot(exp_df, 'Duration (days)', 'Group Size', 'Duration vs Group Size in NASA Experiments')
+
+    # Creating a box plot to show distribution of group sizes
+    create_boxplot(exp_df, x='Experiment', y='Group Size', title='Group Size Distribution in NASA Experiments')
 
 # Main application flow
 def main():
     display_sidebar()
     create_interactive_plots()
-
 
 # Run the application
 if __name__ == "__main__":
